@@ -5,18 +5,20 @@
 
 class Branch {
     //Наследуемое поле 
-    std::string elfs_home;
+    std::vector<std::string> elfs_home;
 public:
     //Метот заполнения наследуемого поля
     void setSettlementElves() {
         std::string name;
         std::cout << "Enter elf name: " << std::endl;
         std::cin >> name;
-       this -> elfs_home = name;
+        elfs_home.push_back(name);
     }
     // Метод доступа к проживающим эльфам
-    std::string getResidentElf() {
-        return elfs_home;
+    void getResidentElf() {
+        for (int i = 0; i < elfs_home.size(); i++) {
+            std::cout << elfs_home[i] << std::endl;
+        }
     }
     //Функция случайной инициализации массива
     int random_size(int max, int step) {
@@ -43,9 +45,13 @@ public:
     void setAddHouseListsMediumBranch() {
         mediumBranchs.push_back(mediumBranch);
     }
+    //Метод доступа к размеру списка домов на ветке
+    int getSizeListsMediumBranch() {
+        return SIZE;
+    }
     //Метод доступа к списку домов на ветке
-    std::vector<MediumBranch*> getListHouseMediumBranch() {
-        return mediumBranchs;
+    void getListHouseMediumBranch(int num_house) {
+        mediumBranchs[num_house]->getResidentElf();
     }
     //Метод доступа к классу MediumBranch
     MediumBranch* getMediumBranch() {
@@ -69,8 +75,8 @@ public:
         bigBranchs.push_back(bigBranch);
     }
     //Метод доступа к списку домов на ветке
-    std::vector<BigBranch*> getListHouseBigBranch() {
-        return bigBranchs;
+    void getListHouseBigBranch(int num_house) {
+        bigBranchs[num_house]->getResidentElf();
     }
     //Метод доступа к размеру списка домов на ветке
     int getSizeListsBigBranch() {
