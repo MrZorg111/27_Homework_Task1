@@ -4,7 +4,7 @@
 #include <vector>
 
 class Branch {
-   
+    std::vector<std::string> home;
 public:
    
 };
