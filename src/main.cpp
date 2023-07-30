@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "Class.h"
+#include "Wood.h"
 
 int main() {
 	Wood wood[5];

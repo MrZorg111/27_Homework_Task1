@@ -4,10 +4,10 @@
 #include "Branch.h"
 
 class MediumBranch : public Branch {
-	const int SIZE_HOUSE = 5;
+	const int VOL_HOUSE_MBRANCH = 5;
 public:
 	//Геттерс для достума к количеству домов на ветке
-	int getSizeHouse() {
-		return SIZE_HOUSE;
+	int getVolumeHouseMBranch() {
+		return VOL_HOUSE_MBRANCH;
 	}
 };
