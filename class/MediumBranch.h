@@ -4,7 +4,7 @@
 #include "Branch.h"
 
 class MediumBranch : public Branch {
-	const int VOL_HOUSE_MBRANCH = 5;
+	const int VOL_HOUSE_MBRANCH = 3;
 public:
 	//Геттерс для достума к количеству домов на ветке
 	int getVolumeHouseMBranch() {
