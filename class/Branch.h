@@ -8,9 +8,12 @@ public:
 	//Сеттерс заселения эльфов в домики
 	void setSettlElf() {
 		std::string name_elf;
-		std::cout << "Введите имя эльфа: " << std::endl;
-		std::cin >> name_elf;
-		elfs_home.push_back(name_elf);
+		for (int h = 0; h < 5; h++) {
+			std::cout << h << " домик из 5." << std::endl;
+			std::cout << "Введите имя эльфа: " << std::endl;
+			std::cin >> name_elf;
+			elfs_home.push_back(name_elf);
+		}
 	}
 	//Сеттерс очистки данных о заселении
 	void setClear() {

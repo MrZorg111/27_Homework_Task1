@@ -28,12 +28,6 @@ public:
 	int getVolumeHouseBBranch() {
 		return VOL_HOUSE_BBRANCH;
 	}
-	//Метод доступа к списку заселенных средних веток
-	void getListResident() {
-		for (int res_branch = 0; res_branch < mediumBranchs.size(); res_branch++) {
-			mediumBranchs[res_branch].getResidentElf();
-		}
-	}
 	// Метод доступа к домам эльфов
 	MediumBranch getHouseMB() {
 		return mediumBranch;

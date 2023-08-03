@@ -25,17 +25,17 @@ public:
 		bigBranchs.push_back(bigBranch);
 		bigBranch.setClear();
 	}
-	/*---------------------------------------------------------------*/
+	/*------------------------------------------------------*/
 	//Метод доступа к кол-ву средних веток
-	int getVolMB(int n) {
-		bigBranchs[n].getVolMB();
+	int getVolMB() {
+		return bigBranch.getVolMB();
 	}
 	//Метод доступа к кол-ву больших веток
 	int getVolBB() {
 		return VOL_BB;
 	}
 	//Метод доступа к заселенным веткам
-	void getInfoListMB() {
+	void getInfoLists() {
 		for (int bb_list = 0; bb_list < bigBranchs[bb_list].getVolumeHouseBBranch(); bb_list++) {
 			bigBranchs[bb_list].getListResident();
 			bigBranchs[bb_list].getResidentElf();
