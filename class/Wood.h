@@ -2,11 +2,12 @@
 #include <string>
 #include <vector>
 #include "BigBranch.h"
+#include "Functions.h"
 
 class Wood {
 	BigBranch bigBranch;
 	std::vector<BigBranch> bigBranchs;
-	const int VOL_BB = random_size(3, 2);
+	const int VOL_BB = 1 /*random_size(3, 2)*/;
 public:
 	//Метод доступа к заселению средней ветки
 	void setSettlMB() {
@@ -14,7 +15,7 @@ public:
 	}
 	//Метод заселения большой ветки
 	void setSettlBB() {
-		bigBranch.setSettlElf();
+		bigBranch.setSettlElf(bigBranch.getVolumeHouseBBranch());
 	}
 	//Метод доступа к созданию списка домов на средних ветках
 	void setMakeLIstMB() {
@@ -24,6 +25,7 @@ public:
 	void setMakeListBB() {
 		bigBranchs.push_back(bigBranch);
 		bigBranch.setClear();
+		bigBranch.getClearListMB();
 	}
 	/*------------------------------------------------------*/
 	//Метод доступа к кол-ву средних веток
@@ -34,11 +36,25 @@ public:
 	int getVolBB() {
 		return VOL_BB;
 	}
-	//Метод доступа к заселенным веткам
-	void getInfoLists() {
-		for (int bb_list = 0; bb_list < bigBranchs[bb_list].getVolumeHouseBBranch(); bb_list++) {
-			bigBranchs[bb_list].getListResident();
-			bigBranchs[bb_list].getResidentElf();
+	//Метод поиска соседей заданного эльфа
+	bool getFindElfOnBigBranch(std::string find_elf, int num_b) {
+		int num_m = 0;
+		if (num_b < bigBranchs.size()) {
+			if (!bigBranchs[num_b].getFindElfOnMBranch(find_elf, num_m)) {
+				if (!bigBranchs[num_b].getFindElf(find_elf)) {
+					getFindElfOnBigBranch(find_elf, num_b += 1);
+				}
+				else {
+					bigBranchs[num_b].getFindNeighbourInHome(find_elf);
+					return true;
+				}
+			}
+			else {
+				return true;
+			}
+		}
+		else {
+			return false;
 		}
 	}
 };
