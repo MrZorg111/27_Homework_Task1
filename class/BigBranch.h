@@ -21,18 +21,18 @@ public:
 		mediumBranch.setClear();
 	}
 	//Метод доступа к поиску на средних ветках
-	bool getFindElfOnMBranch(std::string name_elf, int num_m) {
-		if (num_m < mediumBranchs.size()) {
-			if (!mediumBranchs[num_m].getFindElf(name_elf)) {
-				getFindElfOnMBranch(name_elf, num_m += 1);
+	bool getFindElfOnMBranch(std::string name_elf, int num_m = 0) {
+		if (!mediumBranchs[num_m].getFindElf(name_elf)) {
+			if ((num_m + 1) >= VOL_MB) {
+				return false;
 			}
 			else {
-				mediumBranchs[num_m].getFindNeighbourInHome(name_elf);
-				return true;
+				getFindElfOnMBranch(name_elf, num_m += 1);
 			}
 		}
 		else {
-			return false;
+			mediumBranchs[num_m].getFindNeighbourInHome(name_elf);
+			return true;
 		}
 	}
 	//Метод доступа к кол-ву домов на большой ветке

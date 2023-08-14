@@ -37,24 +37,23 @@ public:
 		return VOL_BB;
 	}
 	//Метод поиска соседей заданного эльфа
-	bool getFindElfOnBigBranch(std::string find_elf, int num_b) {
-		int num_m = 0;
-		if (num_b < bigBranchs.size()) {
-			if (!bigBranchs[num_b].getFindElfOnMBranch(find_elf, num_m)) {
-				if (!bigBranchs[num_b].getFindElf(find_elf)) {
-					getFindElfOnBigBranch(find_elf, num_b += 1);
+	bool getFindElfOnBigBranch(std::string find_elf, int num_b = 0) {
+		if (!bigBranchs[num_b].getFindElfOnMBranch(find_elf)) {
+			if (!bigBranchs[num_b].getFindElf(find_elf)) {
+				if ((num_b + 1) >= VOL_BB) {
+					return false;
 				}
 				else {
-					bigBranchs[num_b].getFindNeighbourInHome(find_elf);
-					return true;
+					getFindElfOnBigBranch(find_elf, num_b += 1);
 				}
 			}
 			else {
+				bigBranchs[num_b].getFindNeighbourInHome(find_elf);
 				return true;
 			}
 		}
 		else {
-			return false;
+			return true;
 		}
 	}
 };

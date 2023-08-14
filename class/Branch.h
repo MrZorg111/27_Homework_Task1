@@ -8,9 +8,10 @@ public:
 	//Сеттерс заселения эльфов в домики
 	void setSettlElf(int max_house) {
 		std::string name_elf;
+		std::cout << "Всего домиков " << max_house << std::endl;
+		std::cout << "Введите имя эльфа: " << std::endl;
 		for (int h = 0; h < max_house; h++) {
-			std::cout << h + 1 << " домик из " << max_house << std::endl;
-			std::cout << "Введите имя эльфа: " << std::endl;
+			std::cout << h + 1 << ")";
 			std::cin >> name_elf;
 			elfs_home.push_back(name_elf);
 		}
@@ -33,7 +34,7 @@ public:
 		std::cout << "Соседи искомого эльфа: ";
 		for (int find_neigh = 0; find_neigh < elfs_home.size(); find_neigh++) {
 			if (elfs_home[find_neigh] != find_elf && elfs_home[find_neigh] != "none") {
-				std::cout << elfs_home[find_neigh] << " \n";
+				std::cout << elfs_home[find_neigh] << ", ";
 			}
 		}
 	}
