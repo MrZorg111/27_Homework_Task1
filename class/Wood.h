@@ -7,15 +7,15 @@
 class Wood {
 	BigBranch bigBranch;
 	std::vector<BigBranch> bigBranchs;
-	const int VOL_BB = 1 /*random_size(3, 2)*/;
+	const int VOL_BB = random_size(3, 2);
 public:
 	//Метод доступа к заселению средней ветки
-	void setSettlMB() {
-		bigBranch.setSettlElfOnMBranch();
+	void setSettlMB(std::string name_elf) {
+		bigBranch.setSettlElfOnMBranch(name_elf);
 	}
 	//Метод заселения большой ветки
-	void setSettlBB() {
-		bigBranch.setSettlElf(bigBranch.getVolumeHouseBBranch());
+	void setSettlBB(std::string name_elf) {
+		bigBranch.setSettlElf(name_elf);
 	}
 	//Метод доступа к созданию списка домов на средних ветках
 	void setMakeLIstMB() {
@@ -28,13 +28,61 @@ public:
 		bigBranch.getClearListMB();
 	}
 	/*------------------------------------------------------*/
-	//Метод доступа к кол-ву средних веток
-	int getVolMB() {
-		return bigBranch.getVolMB();
+	//Метод доступа к кол-ву домов на ветках
+	int getAllHause(char s) {
+		return bigBranch.getVolumeAllHouse(s);
 	}
-	//Метод доступа к кол-ву больших веток
-	int getVolBB() {
-		return VOL_BB;
+	//Метод доступа к макс. кол-ву веток
+	int getAllBranch(char s) {
+		if (s == 'M') {
+			return bigBranch.getVolMB();
+		}
+		else if (s == 'B') {
+			return VOL_BB;
+		}
+		else {
+			std::cout << "Не верный ввод данных! " << std::endl;
+			return false;
+		}
+	}
+	//Метод доступа к количеству веток в момент заселения
+	int getAllVolBranchsRealTime(char s) {
+		if (s == 'B') {
+			return bigBranchs.size();
+		}
+		else if (s == 'M') {
+			return bigBranch.getVolMBRealTime();
+		}
+	}
+	//Метод доступа к размеру списка жильцов
+	int getAllVolElfs(char s) {
+		return bigBranch.getAllElfsHome(s);
+	}
+	//Метод проверочного поиска на ветках 
+	bool getCheckAllBranch(std::string name) {
+		if (bigBranchs.size() == 0) {
+			if (!bigBranch.getCheckMB(name)) {
+				return bigBranch.getCheckBB(name);
+			}
+			else {
+				return true;
+			}
+		}
+		else {
+			for (int check_b = 0; check_b < bigBranchs.size(); check_b++) {
+				if (!bigBranchs[check_b].getCheckMB(name)) {
+					if (!bigBranchs[check_b].getCheckBB(name)) {
+						return false;
+					}
+					else {
+						return true;
+					}
+				}
+				else {
+					return true;
+				}
+			}
+		}
 	}
 	//Метод поиска соседей заданного эльфа
 	bool getFindElfOnBigBranch(std::string find_elf, int num_b = 0) {
@@ -44,7 +92,7 @@ public:
 					return false;
 				}
 				else {
-					getFindElfOnBigBranch(find_elf, num_b += 1);
+					return getFindElfOnBigBranch(find_elf, num_b += 1);
 				}
 			}
 			else {

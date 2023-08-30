@@ -1,27 +1,28 @@
 #pragma once
+#include <iostream>
 #include <string>
 #include <vector>
 
 class Branch {
 	std::vector<std::string> elfs_home;
 public:
-	//Сеттерс заселения эльфов в домики
-	void setSettlElf(int max_house) {
-		std::string name_elf;
-		std::cout << "Всего домиков " << max_house << std::endl;
-		std::cout << "Введите имя эльфа: " << std::endl;
-		for (int h = 0; h < max_house; h++) {
-			std::cout << h + 1 << ")";
-			std::cin >> name_elf;
-			elfs_home.push_back(name_elf);
-		}
+	//Метод заселения эльфов в домики
+	void setSettlElf(std::string name_elf) {
+		elfs_home.push_back(name_elf);
 	}
-	//Сеттерс очистки данных о заселении
+	//Метод очистки данных о заселении
 	void setClear() {
 		elfs_home.clear();
 	}
-	//Геттерс поиска соседей заданного эльфа
+	//Метод доступа к размеру списка жильцов
+	int getVolElfs() {
+		return elfs_home.size();
+	}
+	//Метод поиска соседей заданного эльфа
 	bool getFindElf(std::string find_elf) {
+		if (elfs_home.size() == 0) {
+			return false;
+		}
 		for (int find = 0; find < elfs_home.size(); find++) {
 			if (find_elf == elfs_home[find]) {
 				return true;
@@ -29,7 +30,7 @@ public:
 		}
 		return false;
 	}
-	//Геттерс для вывода соседей искомого эльфа
+	//Метод для вывода соседей искомого эльфа
 	void getFindNeighbourInHome(std::string find_elf) {
 		std::cout << "Соседи искомого эльфа: ";
 		for (int find_neigh = 0; find_neigh < elfs_home.size(); find_neigh++) {
@@ -38,4 +39,5 @@ public:
 			}
 		}
 	}
+	
 };
