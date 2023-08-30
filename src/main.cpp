@@ -44,10 +44,13 @@ int main() {
 					}
 					else {
 						std::cout << "Данный эльф уже заселен! " << std::endl;
-						if (h > 0) {
+						if (h == 0) {
+							h = -1;
+						}
+						else if (h > 0) {
 							h -= 1;
 						}
-					}
+ 					}
 				}
 				woods[wood].setMakeLIstMB();
 			}
