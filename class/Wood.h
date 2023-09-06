@@ -41,7 +41,7 @@ public:
 			return VOL_BB;
 		}
 		else {
-			std::cout << "Не верный ввод данных! " << std::endl;
+			std::cout << "Incorrect input!" << std::endl;
 			return false;
 		}
 	}
@@ -68,21 +68,26 @@ public:
 				return true;
 			}
 		}
-		else {
-			for (int check_b = 0; check_b < bigBranchs.size(); check_b++) {
-				if (!bigBranchs[check_b].getCheckMB(name)) {
-					if (!bigBranchs[check_b].getCheckBB(name)) {
-						return false;
+		if (bigBranchs.size() > 0 && bigBranchs.size() <= VOL_BB) {
+		//	std::cout << "YAHHOOO!!" << std::endl;
+			for (int check_bb = 0; check_bb < bigBranchs.size(); check_bb++) {
+				if (!bigBranchs[check_bb].getCheckMB(name) && !bigBranch.getCheckMB(name)) {
+					if (bigBranchs[check_bb].getCheckBB(name)) {
+						return true;
 					}
 					else {
-						return true;
+						continue;
 					}
 				}
 				else {
 					return true;
 				}
 			}
+			if (bigBranchs.size() != VOL_BB) {
+				return bigBranch.getCheckBB(name);
+			}
 		}
+		return false;
 	}
 	//Метод поиска соседей заданного эльфа
 	bool getFindElfOnBigBranch(std::string find_elf, int num_b = 0) {
@@ -105,3 +110,4 @@ public:
 		}
 	}
 };
+

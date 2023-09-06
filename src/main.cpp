@@ -6,26 +6,21 @@
 
 bool check_name(Wood woods[], int size_w, std::string name) {
 	for (int w = 0; w < size_w; w++) {
-		if (!woods[w].getCheckAllBranch(name)) {
-			return false;
-		}
-		else if (woods[w].getCheckAllBranch(name)) {
+		if (woods[w].getCheckAllBranch(name)) {
 			return true;
 		}
-		else {
-			std::cout << "Неверный ввод данных!" << std::endl;
-		}
 	}
+	return false;
 }
 
 int main() {
-	Wood woods[1];
-	const int SIZE_WOOD = 1;
+	Wood woods[2];
+	const int SIZE_WOOD = 2;
 	std::string name;
 	setlocale(LC_ALL, "rus");
 	std::cout << "Let's settle our elves in their houses:" << std::endl;
 
-	for (int wood = 0; wood < 1; wood++) {
+	for (int wood = 0; wood < SIZE_WOOD; wood++) {
 		std::cout << "Let's populate our " << wood + 1 << "st tree: " << std::endl;
 		std::cout << "On him " << woods[wood].getAllBranch('B') << " large branches." << std::endl;
 			
@@ -33,9 +28,9 @@ int main() {
 			std::cout << "On " << b_branch + 1 << " branch, " << woods[wood].getAllBranch('M') << " medium branchs." << std::endl;
 					
 			for (int m_branch = 0; m_branch < woods[wood].getAllBranch('M'); m_branch++) {
-				std::cout << "Populate " << m_branch + 1 << "st medium branch.";
-				std::cout << "Всего домиков " << woods[wood].getAllHause('M') << std::endl;
-				std::cout << "Введите имя эльфа: " << std::endl;
+				std::cout << "Populate " << m_branch + 1 << "st medium branch." << std::endl;
+				std::cout << "Total houses " << woods[wood].getAllHause('M') << std::endl;
+				std::cout << "Enter the name of the elf: " << std::endl;
 				for (int h = 0; h < woods[wood].getAllHause('M'); h++) {
 					std::cout << h + 1 << ")";
 					std::cin >> name;
@@ -43,7 +38,7 @@ int main() {
 						woods[wood].setSettlMB(name);
 					}
 					else {
-						std::cout << "Данный эльф уже заселен! " << std::endl;
+						std::cout << "This elf is already inhabited!" << std::endl;
 						if (h == 0) {
 							h = -1;
 						}
@@ -55,8 +50,8 @@ int main() {
 				woods[wood].setMakeLIstMB();
 			}
 			std::cout << "Let 's populate the big branch itself: " << std::endl;
-			std::cout << "Всего домиков " << woods[wood].getAllHause('B') << std::endl;
-			std::cout << "Введите имя эльфа: " << std::endl;
+			std::cout << "Total houses " << woods[wood].getAllHause('B') << std::endl;
+			std::cout << "Enter the name of the elf: " << std::endl;
 			for (int h = 0; h < woods[wood].getAllHause('B'); h++) {
 				std::cout << h + 1 << ")";
 				std::cin >> name;
@@ -64,7 +59,7 @@ int main() {
 					woods[wood].setSettlBB(name);
 				}
 				else {
-					std::cout << "Данный эльф уже заселен! " << std::endl;
+					std::cout << "This elf is already inhabited!" << std::endl;
 					if (h == 0) {
 						h = -1;
 					}

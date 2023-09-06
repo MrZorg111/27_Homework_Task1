@@ -31,8 +31,9 @@ public:
 			return mediumBranch.getVolumeHouseMBranch();
 		}
 		else {
-			std::cout << "Неверный ввод!" << std::endl;
+			std::cout << "Incorrect input!" << std::endl;
 		}
+		return 0;
 	}
 	//Метод доступа к размеру списка жильцов
 	int getAllElfsHome(char s) {
@@ -43,7 +44,7 @@ public:
 			return mediumBranch.getVolElfs();
 		}
 		else {
-			std::cout << "Неверный ввод данных!";
+			std::cout << "Incorrect input!";
 		}
 	}
 	//Метод доступа к кол-ву средних веток на этой большой
@@ -63,9 +64,14 @@ public:
 		if (mediumBranchs.size() == 0) {
 			return mediumBranch.getCheckMB(name);
 		}
-		for (int check_m = 0; check_m < mediumBranchs.size(); check_m++) {
-			if (mediumBranchs[check_m].getCheckMB(name)) {
-				return true;
+		if (mediumBranchs.size() > 0 && mediumBranchs.size() <= VOL_MB) {
+			for (int check_mb = 0; check_mb < mediumBranchs.size(); check_mb++) {
+				if (mediumBranchs[check_mb].getCheckMB(name)) {
+					return true;
+				}
+			}
+			if (mediumBranchs.size() != VOL_MB) {
+				return mediumBranch.getCheckMB(name);
 			}
 		}
 		return false;
