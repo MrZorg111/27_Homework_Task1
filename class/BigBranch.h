@@ -12,87 +12,44 @@ class BigBranch : public Branch {
 	const int VOL_HOUSE_BBRANCH = 5;
 public:
 	//Метод заселения эльфов на среднюю ветку
-	void setSettlElfOnMBranch(std::string name_elf) {
-		mediumBranch.setSettlElf(name_elf);
-	}
-	//Метод заполнения списка заселенных средних веток
-	void setListSettleMBranch() {
-		mediumBranchs.push_back(mediumBranch);
-		mediumBranch.setClear();
-	}
-
-
-	//Метод доступа к количеству домов на ветках
-	int getVolumeAllHouse(char s) {
-		if (s == 'B') {
-			return VOL_HOUSE_BBRANCH;
-		}
-		else if (s == 'M') {
-			return mediumBranch.getVolumeHouseMBranch();
-		}
-		else {
-			std::cout << "Incorrect input!" << std::endl;
-		}
-		return 0;
-	}
-	//Метод доступа к размеру списка жильцов
-	int getAllElfsHome(char s) {
-		if (s == 'B') {
-			return getVolElfs();
-		}
-		else if (s == 'M') {
-			return mediumBranch.getVolElfs();
-		}
-		else {
-			std::cout << "Incorrect input!";
-		}
-	}
-	//Метод доступа к кол-ву средних веток на этой большой
-	int getVolMB() {
-		return VOL_MB;
-	}
-	//Метод доступа к количеству веток в момент заселения
-	int getVolMBRealTime() {
-		return mediumBranchs.size();
-	}
-	//Метод проверки на большой ветке
-	bool getCheckBB(std::string name) {
-		return getFindElf(name);
-	}
-	//Метод проверки на средней ветке
-	bool getCheckMB(std::string name) {
-		if (mediumBranchs.size() == 0) {
-			return mediumBranch.getCheckMB(name);
-		}
-		if (mediumBranchs.size() > 0 && mediumBranchs.size() <= VOL_MB) {
-			for (int check_mb = 0; check_mb < mediumBranchs.size(); check_mb++) {
-				if (mediumBranchs[check_mb].getCheckMB(name)) {
-					return true;
-				}
+	void setSettlElfOnMBranch() {
+		for (int mb = 0; mb < VOL_MB; mb++) {
+			for (int m = 0; m < mediumBranch.getVolumeHouseMBranch(); m++) {
+				mediumBranch.setSettlElf();
 			}
-			if (mediumBranchs.size() != VOL_MB) {
-				return mediumBranch.getCheckMB(name);
-			}
+			mediumBranchs.push_back(mediumBranch);
+			mediumBranch.setClear();
 		}
-		return false;
 	}
-	//Метод доступа к очистке вектора списка домов на средней ветке
-	void getClearListMB() {
+	//Метод очистки списка средних веток
+	void SetClearMBranchs() {
 		mediumBranchs.clear();
 	}
-	//Метод доступа к поиску на средних ветках
-	bool getFindElfOnMBranch(std::string name_elf, int num_m = 0) {
-		if (!mediumBranchs[num_m].getFindElf(name_elf)) {
-			if ((num_m + 1) >= VOL_MB) {
-				return false;
-			}
-			else {
-				return getFindElfOnMBranch(name_elf, num_m += 1);
+
+
+	//Метод доступа к кол-ву домиков на большой ветке
+	int getVolHouseBBranch() {
+		return VOL_HOUSE_BBRANCH;
+	}
+	//Метод доступа к списку домиков на средних ветках
+	void getListMBranch() {
+		for (int list_mb = 0; list_mb < mediumBranchs.size(); list_mb++) {
+			std::cout << "Middle branch " << list_mb + 1 << " ";
+			mediumBranchs[list_mb].getElfs();
+			std::cout << std::endl;
+		}
+	}
+	//Метод поиска эльфов на всех ветвях
+	bool getFindAllBranch(std::string wanted, int& adress_mb, int& neighbour) {
+		for (int want_ab = 0; want_ab < mediumBranchs.size(); want_ab++) {
+			if (mediumBranchs[want_ab].getFindElf(wanted, neighbour)) {
+				adress_mb = want_ab + 1;
+				return true;
 			}
 		}
-		else {
-			mediumBranchs[num_m].getFindNeighbourInHome(name_elf);
+		if (getFindElf(wanted, neighbour)) {
 			return true;
 		}
+		return false;
 	}
 };
