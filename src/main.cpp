@@ -5,8 +5,8 @@
 
 
 int main() {
-	Wood woods[1];
-	const int SIZE_WOOD = 1;
+	Wood woods[5];
+	const int SIZE_WOOD = 5;
 	std::string name;
 	setlocale(LC_ALL, "rus");
 	std::cout << "Check-in is underway ";
