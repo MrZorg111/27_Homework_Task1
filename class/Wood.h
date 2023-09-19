@@ -7,7 +7,7 @@
 class Wood {
 	BigBranch bigBranch;
 	std::vector<BigBranch> bigBranchs;
-	const int VOL_BB = random_size(3, 2);
+	const int VOL_BB = random_size(3, 3);
 	
 public:
 	//Метод доступа к заселению средней ветки

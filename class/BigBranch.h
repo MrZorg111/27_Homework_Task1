@@ -8,7 +8,7 @@ class BigBranch : public Branch {
 	MediumBranch mediumBranch;
 	std::vector<MediumBranch> mediumBranchs;
 	//Метод определения кол-ва средних веток на одной большой
-	const int VOL_MB = random_size(1, 2);
+	const int VOL_MB = random_size(2, 2);
 	const int VOL_HOUSE_BBRANCH = 5;
 public:
 	//Метод заселения эльфов на среднюю ветку

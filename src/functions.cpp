@@ -5,7 +5,7 @@
 #include "Functions.h"
 
 //Функция радомного определения кол-ва веток
-int random_size(int step, int vol) {
+int random_size(int vol, int step) {
 	srand(std::time(nullptr));
 	return rand() % vol + step;
 }
