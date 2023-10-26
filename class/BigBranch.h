@@ -4,21 +4,19 @@
 #include "MediumBranch.h"
 #include "Functions.h"
 
-class BigBranch : public Branch {
+class BigBranch {
 	MediumBranch mediumBranch;
 	std::vector<MediumBranch> mediumBranchs;
 	//Метод определения кол-ва средних веток на одной большой
 	const int VOL_MB = random_size(2, 2);
-	const int VOL_HOUSE_BBRANCH = 5;
+
 public:
+
 	//Метод заселения эльфов на среднюю ветку
 	void setSettlElfOnMBranch() {
-		for (int mb = 0; mb < VOL_MB; mb++) {
-			for (int m = 0; m < mediumBranch.getVolumeHouseMBranch(); m++) {
-				mediumBranch.setSettlElf();
-			}
+		for (int put_elf = 0; put_elf < VOL_MB; put_elf++) {
+			mediumBranch.setNameElf();
 			mediumBranchs.push_back(mediumBranch);
-			mediumBranch.setClear();
 		}
 	}
 	//Метод очистки списка средних веток

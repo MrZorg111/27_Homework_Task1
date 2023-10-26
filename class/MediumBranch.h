@@ -1,11 +1,16 @@
 #pragma once
-#include "Branch.h"
+#include <string>
+#include "Functions.h"
 
-class MediumBranch : public Branch {
-	const int VOL_HOUSE_MBRANCH = 3;
+class MediumBranch {
+	std::string name_elf;
 public:
-	//Мектод для достума к количеству домов на ветке
-	int getVolumeHouseMBranch() {
-		return VOL_HOUSE_MBRANCH;
+
+	void setNameElf() {
+		name_elf = generation_names();
+	}
+
+	std::string getNameElf() {
+		return name_elf;
 	}
 };
