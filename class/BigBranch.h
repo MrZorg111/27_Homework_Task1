@@ -5,6 +5,7 @@
 #include "Functions.h"
 
 class BigBranch {
+	std::string name_elf;
 	MediumBranch mediumBranch;
 	std::vector<MediumBranch> mediumBranchs;
 	//Метод определения кол-ва средних веток на одной большой
@@ -12,6 +13,10 @@ class BigBranch {
 
 public:
 
+	//Метод заселения эльфа ма большую ветку
+	void setNameElf() {
+		name_elf = generation_names();
+	}
 	//Метод заселения эльфов на среднюю ветку
 	void setSettlElfOnMBranch() {
 		for (int put_elf = 0; put_elf < VOL_MB; put_elf++) {
@@ -19,34 +24,31 @@ public:
 			mediumBranchs.push_back(mediumBranch);
 		}
 	}
-	//Метод очистки списка средних веток
-	void SetClearMBranchs() {
+	void setClear() {
 		mediumBranchs.clear();
 	}
+	//___________________________________________________//
 
-
-	//Метод доступа к кол-ву домиков на большой ветке
-	int getVolHouseBBranch() {
-		return VOL_HOUSE_BBRANCH;
+	std::string getNameBigElf() {
+		return name_elf;
 	}
-	//Метод доступа к списку домиков на средних ветках
-	void getListMBranch() {
-		for (int list_mb = 0; list_mb < mediumBranchs.size(); list_mb++) {
-			std::cout << "Middle branch " << list_mb + 1 << " ";
-			mediumBranchs[list_mb].getElfs();
-			std::cout << std::endl;
+	void getNameMediumElfs() {
+		for (int e_n = 0; e_n < VOL_MB; e_n++) {
+			std::cout << "\t\t--На средней ветке номер " << e_n + 1;
+			if (mediumBranchs[e_n].getNameElf() == "None") {
+				std::cout << " никто не проживает!" << std::endl;
+			}
+			else {
+				std::cout << " проживает " << mediumBranchs[e_n].getNameElf() << std::endl;
+			}
+			
 		}
 	}
-	//Метод поиска эльфов на всех ветвях
-	bool getFindAllBranch(std::string wanted, int& adress_mb, int& neighbour) {
-		for (int want_ab = 0; want_ab < mediumBranchs.size(); want_ab++) {
-			if (mediumBranchs[want_ab].getFindElf(wanted, neighbour)) {
-				adress_mb = want_ab + 1;
+	bool getFindElf(std::string wanted_elf) {
+		for (int want_e = 0; want_e < VOL_MB; want_e++) {
+			if (mediumBranchs[want_e].getNameElf() == wanted_elf) {
 				return true;
 			}
-		}
-		if (getFindElf(wanted, neighbour)) {
-			return true;
 		}
 		return false;
 	}

@@ -9,43 +9,33 @@ int main() {
 	const int SIZE_WOOD = 5;
 	std::string name;
 	setlocale(LC_ALL, "rus");
-	std::cout << "Check-in is underway ";
+	
+	//Расселим эльфов
+	std::cout << "Идет заселение";
 	for (int w = 0; w < SIZE_WOOD; w++) {
 		std::cout << ". ";
-		woods[w].setSettlBB();
+		woods[w].setListsElfs();
+	}
+	std::cout << std::endl;
+
+	//Посмотрим на наших эльфов
+
+	for (int w = 0; w < SIZE_WOOD; w++) {
+		std::cout << "\nНа дереве " << w + 1 << " проживают: " << std::endl;
+		woods[w].getNameElfsLists();
 	}
 
-	std::cout << "\nLet's look at our elves!" << std::endl;
+	//Поиск нужного эльфа и его соседей
+	std::cout << "Введите имя искомого эльфа: ";
+	std::string wanted_elf;
+	std::cin >> wanted_elf;
 
-	for (int tree = 0; tree < SIZE_WOOD; tree++) {
-		std::cout << "Tree " << tree + 1 << std::endl;
-		woods[tree].getAllElfs();
-		std::cout << std::endl;
-	}
-
-	std::cout << "\nLet's look for our elf:" << std::endl;
-	int adress_mb = 0, adress_bb = 0, neighbour = 0;
-	std::string wanted;
-	std::cin >> wanted;
-
-	for (int tree = 0; tree < SIZE_WOOD; tree++) {
-		if (woods[tree].getAllFind(wanted, adress_mb, adress_bb, neighbour)) {
-			std::cout << "Our Elf lives here!" << std::endl;
-			std::cout << "At address: " << std::endl;
-			if (adress_mb > 0) {
-				std::cout << "Medium branch №" << adress_mb << " on big branch № " << adress_bb << " on tree № " << tree + 1 << std::endl;
-				std::cout << "And has " << neighbour << " neighbors(her)!";
-				break;
-			}
-			else {
-				std::cout << "Big branch № " << adress_bb << " on tree № " << tree + 1 << std::endl;
-				std::cout << "And has " << neighbour << " neighbors(her)!";
-				break;
-			}
-		}
-		if (tree == SIZE_WOOD - 1) {
-			std::cout << "Our elf doesn't live here!" << std::endl;
+	for (int f_e = 0; f_e < SIZE_WOOD; f_e++) {
+		int adress;
+		if (woods[5].getFindElf(wanted_elf, adress)) {
+			std::cout << "Эльф найден!" << std::endl;
 		}
 	}
+	std::cout << "Эльф тут не проживает!" << std::endl;
 	return 0;
 }

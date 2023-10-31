@@ -10,38 +10,38 @@ class Wood {
 	const int VOL_BB = random_size(3, 3);
 	
 public:
-	//Метод доступа к заселению средней ветки
-		void setSettlMB() {
-			bigBranch.setSettlElfOnMBranch();
-		}
-	//Метод заселения большой ветки
-	void setSettlBB() {
+	
+	void setListsElfs() {
 		for (int bb = 0; bb < VOL_BB; bb++) {
-			setSettlMB();
-			for (int b = 0; b < bigBranch.getVolHouseBBranch(); b++) {
-				bigBranch.setSettlElf();
-			}
-		
+			bigBranch.setNameElf();
+			bigBranch.setSettlElfOnMBranch();
 			bigBranchs.push_back(bigBranch);
 			bigBranch.setClear();
-			bigBranch.SetClearMBranchs();
 		}
 	}
-	//Метод доступа к проживающим эльфам на всех ветках
-	void getAllElfs() {
-		for (int list_bb = 0; list_bb < bigBranchs.size(); list_bb++) {
-			std::cout << "Big branch " << list_bb + 1 << " ";
-			bigBranchs[list_bb].getElfs();
-			std::cout << std::endl;
-			bigBranchs[list_bb].getListMBranch();
-			std::cout << std::endl;
+
+	//_____________________________________________________________//
+
+	void getNameElfsLists() {
+		for (int total_name = 0; total_name < VOL_BB; total_name++) {
+			std::cout << "На большой ветке номер " << total_name + 1;
+			if (bigBranchs[total_name].getNameBigElf() == "None") {
+				std::cout << " никто не проживает!" << std::endl;
+			}
+			else {
+				std::cout << " проживает " << bigBranchs[total_name].getNameBigElf() << std::endl;
+			}
+			bigBranchs[total_name].getNameMediumElfs();
 		}
 	}
-	//Метод поиска 
-	bool getAllFind(std::string wanted, int& adress_mb, int& adress_bb, int& neighbour) {
-		for (int wood = 0; wood < bigBranchs.size(); wood++) {
-			if (bigBranchs[wood].getFindAllBranch(wanted, adress_mb, neighbour)) {
-				adress_bb = wood + 1;
+	bool getFindElf(std::string wanted_elf, int& adress) {
+		for (int find_bbranch = 0; find_bbranch < VOL_BB; find_bbranch++) {
+			if (bigBranchs[find_bbranch].getNameBigElf() == wanted_elf) {
+				adress = find_bbranch;
+				return true;
+			}
+			else if (bigBranchs[find_bbranch].getFindElf(wanted_elf)) {
+				adress = find_bbranch;
 				return true;
 			}
 		}
