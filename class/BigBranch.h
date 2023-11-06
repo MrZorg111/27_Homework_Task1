@@ -13,11 +13,11 @@ class BigBranch : public Branch {
 
 public:
 
-	//Метод заселения эльфа ма большую ветку
+	//The method of settling an elf on a large branch
 	void setNameElf() {
 		name_elf = generation_names();
 	}
-	//Метод заселения эльфов на среднюю ветку
+	//The method of settling elves on the middle branch
 	void setSettlElfOnMBranch() {
 		for (int put_elf = 0; put_elf < getSizeMB(); put_elf++) {
 			mediumBranch.setNameElf();
@@ -30,6 +30,7 @@ public:
 
 	//___________________________________________________//
 
+	//Methods of transmitting the names of settled elves
 	std::string getNameBigElf() {
 		return name_elf;
 	}

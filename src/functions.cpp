@@ -4,12 +4,12 @@
 #include <string>
 #include "Functions.h"
 
-//Функция радомного определения кол-ва веток
+//The function of random determination of the number of branches
 int random_size(int vol, int step) {
 	srand(std::time(nullptr));
 	return rand() % vol + step;
 }
-//Функция расселения
+//Settlement function
 std::string generation_names() {
     std::srand(time(nullptr));
     std::string name;
